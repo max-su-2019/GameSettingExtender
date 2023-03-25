@@ -28,6 +28,9 @@ namespace GameSettingExtender
 		case TYPE::kFloat:
 			obj.setting->SetFloat(j.at("value").get<float>());
 			break;
+		case TYPE::kString:
+			obj.setting->SetString(j.at("value").get<std::string>());
+			break;
 		case TYPE::kColorRGB:
 			obj.setting->SetColor(j.at("value").get<std::uint32_t>());
 			break;
