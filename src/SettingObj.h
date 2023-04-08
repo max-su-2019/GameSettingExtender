@@ -8,7 +8,8 @@ namespace GameSettingExtender
 	struct SettingObj
 	{
 		RE::Setting* setting;
+
+		SettingObj(const std::string& a_key, const json& j);
 	};
 
-	void from_json(const json& j, SettingObj& obj);
 }

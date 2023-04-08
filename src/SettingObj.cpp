@@ -2,42 +2,43 @@
 
 namespace GameSettingExtender
 {
-	void from_json(const json& j, SettingObj& obj)
+	SettingObj::SettingObj(const std::string& a_key, const json& j)
 	{
+		setting = new RE::Setting(a_key);
+
 		using TYPE = RE::Setting::Type;
 
-		obj.setting = new RE::Setting(j.at("name").get<std::string>());
-
-		auto type = obj.setting->GetType();
+		auto type = setting->GetType();
 		switch (type) {
 		case TYPE::kBool:
-			obj.setting->SetBool(j.at("value").get<bool>());
+			setting->SetBool(j.get<bool>());
 			break;
 		case TYPE::kCharacter:
-			obj.setting->SetCharacter(j.at("value").get<std::int8_t>());
+			setting->SetCharacter(j.get<std::int8_t>());
 			break;
 		case TYPE::kUnsignedCharacter:
-			obj.setting->SetUnsignedCharacter(j.at("value").get<std::uint8_t>());
+			setting->SetUnsignedCharacter(j.get<std::uint8_t>());
 			break;
 		case TYPE::kInteger:
-			obj.setting->SetInteger(j.at("value").get<std::int32_t>());
+			setting->SetInteger(j.get<std::int32_t>());
 			break;
 		case TYPE::kUnsignedInteger:
-			obj.setting->SetUnsignedInteger(j.at("value").get<std::uint32_t>());
+			setting->SetUnsignedInteger(j.get<std::uint32_t>());
 			break;
 		case TYPE::kFloat:
-			obj.setting->SetFloat(j.at("value").get<float>());
+			setting->SetFloat(j.get<float>());
 			break;
 		case TYPE::kString:
-			obj.setting->SetString(j.at("value").get<std::string>());
+			setting->SetString(j.get<std::string>());
 			break;
 		case TYPE::kColorRGB:
-			obj.setting->SetColor(j.at("value").get<std::uint32_t>());
+			setting->SetColor(j.get<std::uint32_t>());
 			break;
 		case TYPE::kColorRGBA:
-			obj.setting->SetColorA(j.at("value").get<std::uint32_t>());
+			setting->SetColorA(j.get<std::uint32_t>());
 			break;
 		default:
+			ERROR("\"Expection! Invaild Game Setting Type Created!\"");
 			break;
 		}
 	}
